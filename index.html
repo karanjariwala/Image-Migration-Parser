@@ -3,8 +3,7 @@
 <body>
     <br>
     <br>
-    <br> Enter Batch Name:
-    <input id="Segment" type="text" name="Segment" placeholder="In All Capitals"> Enter field Number:
+     Enter field Number:
     <input id="offset" type="number" name="offset" placeholder="Single Digit">
     <br>
     <br>
@@ -31,21 +30,29 @@
             //
             // console.log(segment.value,offset.value,hl7.value);
             //            Hl7= Hl7.value.replace(/[^a-zA-Z0-9]/g, '|');
-            console.log(Hl7.value = Hl7.value.replace(/[^a-zA-Z|.0-9\^~\\&/ ]/g, ""));
+            console.log(Hl7.value = Hl7.value.replace(/[^a-zA-Z|.0-9\^~\\&/-_ ]/g, ""));
             var Hl7_arr = Hl7.value.split("|");
+            console.log(Hl7_arr);
+
+
+      
+
+
             var p;
             var indices = [];
             var array = Hl7_arr;
-            var element = segment.value;
-            var idx = array.indexOf(element);
-            while (idx != -1) {
-                indices.push(idx);
-                idx = array.indexOf(element, idx + 1);
+            for (i=0;i<Hl7_arr.length-1;i++)
+            {
+                if(i%18==0)
+                {
+                    indices.push(i);
+                }
             }
+            
             indices = indices.map(function (x) {
                 return (x + Number(offset.value)-1)
             });
-            console.log(indices);
+             console.log(indices);
             indices.forEach(function (currentValue) {
                     console.log(Hl7_arr[currentValue]);
                       var node = document.createElement("LI");
